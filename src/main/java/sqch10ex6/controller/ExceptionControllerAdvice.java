@@ -11,9 +11,10 @@ import sqch10ex6.exception.NotEnoughMoneyException;
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
 	@ExceptionHandler(NotEnoughMoneyException.class)
-	public ResponseEntity<ErrorDetails> notEnoughMoneyExcepHandler() {
+	public ResponseEntity<ErrorDetails> notEnoughMoneyExcepHandler(
+			NotEnoughMoneyException e) {
 		var details = new ErrorDetails();
-		details.setMessage("잔고가 부족합니다.");
+		details.setMessage(e.getMessage());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 				.body(details);
 	}
